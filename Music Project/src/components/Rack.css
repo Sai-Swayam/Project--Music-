@@ -1,4 +1,7 @@
 
 .rack-body {
-    border: 1px solid var(--clr-orange);
+    /* border: 1px solid var(--clr-orange); */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
