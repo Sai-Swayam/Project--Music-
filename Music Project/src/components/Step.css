@@ -7,6 +7,7 @@
     color: blue;
     font-weight: 800;
     position: relative;
+    box-shadow: 0px 0px 10px 1px rgba(46, 161, 255, 0.31);
 }
 
 .step::after {
@@ -14,11 +15,22 @@
     position: absolute;
     /* inset: 20%; */
     /* padding: 0px 0px; */
-    top:5%;
-    left:33%;
+    top: 5%;
+    left: 33%;
     text-align: center;
 }
 
 .step:active {
     scale: 95%;
+}
+
+.mute {
+    box-shadow: none;
+    color: rgba(0, 255, 255, 0.671);
+    background-color: rgba(28, 122, 199, 0.473);
+}
+
+.torq {
+    background-color: turquoise;
+    color: rgb(19, 88, 145);
 }
