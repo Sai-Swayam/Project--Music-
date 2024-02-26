@@ -3,7 +3,7 @@ import "./Step.css";
 
 const Step = (props) => {
   const [mute, setMute] = useState(props.mute);
-  console.log(props.mute);
+  // console.log(props.mute);
 
   const toggleMute = () => {
     if (mute === 0) {
