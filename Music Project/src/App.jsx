@@ -1,4 +1,5 @@
 import "./App.css";
+import PlayPause from "./components/PlayPause";
 import Rack from "./components/Rack";
 // import * as Tone from 'tone'
 
@@ -7,6 +8,7 @@ function App() {
     <>
       {/* <div className="blur-vignette"></div> */}
       <Rack />
+      <PlayPause />
     </>
   );
 }

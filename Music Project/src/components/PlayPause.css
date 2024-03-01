@@ -1,0 +1,9 @@
+.playpause{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    background-color: aqua;
+}
