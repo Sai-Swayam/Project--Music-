@@ -4,6 +4,7 @@ import Step from "./Step";
 import * as Tone from "tone";
 
 const Patch = (props) => {
+  const [mute, setMute] = useState(true);
   const stepArray = new Array(16);
   for (let i = 0; i < 16; ++i) stepArray[i] = 1;
   const [steps, setSteps] = useState(stepArray);
@@ -11,6 +12,8 @@ const Patch = (props) => {
     const player = new Tone.Player(props.url).toDestination();
     player.autostart = true;
     console.log("audio is ready");
+    if (mute) player.mute = true;
+    else player.mute = false;
   };
 
   return (
@@ -20,6 +23,10 @@ const Patch = (props) => {
         id="{props.sound}"
         name="patch"
         value="{props.sound}"
+        onChange={() => {
+          setMute(!mute);
+          console.log(mute);
+        }}
       />
       <button className="patch" onClick={play}>
         <h1>{props.sound}</h1>
