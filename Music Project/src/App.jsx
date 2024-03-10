@@ -9,6 +9,7 @@ function App() {
       {/* <div className="blur-vignette"></div> */}
       <Rack />
       <PlayPause />
+      {/*  */}
     </>
   );
 }
