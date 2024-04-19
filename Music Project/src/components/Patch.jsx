@@ -25,6 +25,8 @@ const Patch = (props) => {
     player.mute = mute;
   };
 
+  let ind = -1;
+
   return (
     <div className="patch-body">
       <input
@@ -41,9 +43,12 @@ const Patch = (props) => {
         <h1>{props.sound}</h1>
       </button>
       <div className="step-body">
-        {samples[props.id].StepArray.map((step, index) => (
-          <Step key={index} step={step} id={props.id} index={step.index}/>
-        ))}
+        {samples[props.id].StepArray.map((step, index) => {
+          // console.log(props.id)
+          ind++;
+          return(
+          <Step key={index} step={step} id={props.id} index={ind}/>
+        )})}
       </div>
     </div>
   );
