@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Patch.css";
 import Step from "./Step";
 import * as Tone from "tone";
@@ -12,17 +12,15 @@ const Patch = (props) => {
   //     mute: 1,
   //     index: i,
   //   };
-
   // const [steps, setSteps] = useState(stepArray);
-  const { samples, setSamples } = useContext(Context);
+  // const { steps, setSteps } = useContext(Context);
+
 
   const play = () => {
     const player = new Tone.Player(props.url).toDestination();
     player.autostart = true;
-    // console.log("audio is ready");
-    // console.log(steps)
+    console.log(playing);
     console.log(mute);
-    player.mute = mute;
   };
 
   return (
@@ -41,8 +39,8 @@ const Patch = (props) => {
         <h1>{props.sound}</h1>
       </button>
       <div className="step-body">
-        {samples[props.id].StepArray.map((step, index) => (
-          <Step key={index} step={step} id={props.id} index={step.index}/>
+        {steps.map((step, index) => (
+          <Step key={index} step={step} />
         ))}
       </div>
     </div>
