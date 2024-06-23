@@ -1,4 +1,7 @@
+
+
 body {
+  --clr-slate600: rgba(70, 70, 78, 0.664);
   background-color: black;
   color: var(--clr-slate400);
   /* font-family: gt america mono; */
