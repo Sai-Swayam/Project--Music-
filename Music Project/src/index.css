@@ -1,5 +1,10 @@
 /* variables */
 
+@font-face {
+	font-family: 'jetbrains mono';
+	src: url('../public/fonts/JetBrainsMono-Regular.woff2') format('.woff2');
+  }
+
 :root {
     --clr-dark:#000000;
     --clr-light: #f3f4f6;
@@ -50,6 +55,7 @@ Use a better box model (opinionated).
 html {
 	/* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
 	font-family:
+		'jetbrains mono',
 		system-ui,
 		'Segoe UI',
 		Roboto,
