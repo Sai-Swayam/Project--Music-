@@ -7,7 +7,7 @@ import ContextProvider from "./context/ContextProvider";
 function App() {
   return (
     <ContextProvider>
-      {/* <div className="blur-vignette"></div> */}
+      <div className="blur-vignette"></div>
       <Rack />
       <PlayPause />
     </ContextProvider>

@@ -9,9 +9,6 @@ const ContextProvider = ({ children }) => {
       mute: 1,
       index: i,
     };
-  // const [steps, setSteps] = useState(stepArray);
-
-  //-------------------------------------------------------
 
   const [samples, setSamples] = useState([
     {
@@ -39,8 +36,6 @@ const ContextProvider = ({ children }) => {
       StepArray: [...stepArray],
     },
   ]);
-
-  //-------------------------------------------------------
 
   return (
     <Context.Provider value={{ samples, setSamples }}>

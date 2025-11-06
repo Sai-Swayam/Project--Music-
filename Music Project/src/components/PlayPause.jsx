@@ -16,27 +16,27 @@ const PlayPause = () => {
   const [playing, setPlaying] = useState(false);
   const [setup, setSetup] = useState(false);
 
-  //useRef
   const loopRef = useRef(null);
 
-  //useEffect
-  useEffect(() => {
-    // i = 0;
-    // console.log(i);
+  const kick 	= useRef(null);
+  const hihat	= useRef(null);
+  const snare	= useRef(null);
+  const tom 	= useRef(null);
 
-    let kick = new Tone.Player("/kick-acoustic01.wav").toDestination();
-    let hihat = new Tone.Player("/hihat-acoustic01.wav").toDestination();
-    let snare = new Tone.Player("/snare-acoustic01.wav").toDestination();
-    let tom = new Tone.Player("/tom-acoustic01.wav").toDestination();
+
+  useEffect(() => {
+    kick.current = new Tone.Player("/kick-acoustic01.wav").toDestination();
+    hihat.current = new Tone.Player("/hihat-acoustic01.wav").toDestination();
+    snare.current = new Tone.Player("/snare-acoustic01.wav").toDestination();
+    tom.current = new Tone.Player("/tom-acoustic01.wav").toDestination();
 
     loopRef.current = new Tone.Loop((time) => {
-      // kick.start(time);
       if (i === 16) i = 0;
 
-      samples[0].StepArray[i].mute === 0 ? kick.start(time) : "";
-      samples[1].StepArray[i].mute === 0 ? hihat.start(time) : "";
-      samples[2].StepArray[i].mute === 0 ? snare.start(time) : "";
-      samples[3].StepArray[i].mute === 0 ? tom.start(time) : "";
+      samples[0].StepArray[i].mute === 0 ? kick.current.start(time) : "";
+      samples[1].StepArray[i].mute === 0 ? hihat.current.start(time) : "";
+      samples[2].StepArray[i].mute === 0 ? snare.current.start(time) : "";
+      samples[3].StepArray[i].mute === 0 ? tom.current.start(time) : "";
 
       i++;
     }, "4n").start(0);
@@ -47,10 +47,7 @@ const PlayPause = () => {
   }, [playing]);
 
   // play/pause
-  async function goHandler(event) {
-    // -------------
-    console.log(samples);
-    // -------------
+  async function playHandler(event) {
     if (!toneStarted) await Tone.start();
     setToneStarted(true);
     setPlaying(!playing);
@@ -79,7 +76,7 @@ const PlayPause = () => {
 
   return (
     <div className="playpause">
-      <button className="button" onClick={goHandler}>
+      <button className="button" onClick={playHandler}>
         {playing ? "Pause" : "Play"}
       </button>
     </div>
