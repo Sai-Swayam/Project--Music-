@@ -19,14 +19,14 @@ const ContextProvider = ({ children }) => {
     },
     {
       id: 1,
-      name: "hihat",
-      url: "/hihat-acoustic01.wav",
+      name: "snare",
+      url: "/snare-acoustic01.wav",
       StepArray: [...stepArray],
     },
     {
       id: 2,
-      name: "snare",
-      url: "/snare-acoustic01.wav",
+      name: "hihat",
+      url: "/hihat-acoustic01.wav",
       StepArray: [...stepArray],
     },
     {
