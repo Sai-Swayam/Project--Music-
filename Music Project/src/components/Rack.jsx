@@ -4,17 +4,18 @@ import "./Rack.css";
 import Context from "../context/Context";
 
 const Rack = () => {
-  const { samples, setSamples } = useContext(Context);
+	// const { samples, setSamples } = useContext(Context);
+	const { samples } = useContext(Context);
 
-  return (
-    <>
-      <div className="rack-body">
-        {samples.map((sound, index) => {
-          return <Patch sound={sound.name} url={sound.url} key={index} id={sound.id}/>;
-        })}
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div className="rack-body">
+				{samples.current.map((sound, index) => {
+					return <Patch sound={sound.name} url={sound.url} key={index} id={sound.id} />;
+				})}
+			</div>
+		</>
+	);
 };
 
 export default Rack;

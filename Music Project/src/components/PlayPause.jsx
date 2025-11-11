@@ -21,10 +21,10 @@ const PlayPause = () => {
 		loopRef.current = new Tone.Loop((time) => {
 			if (i === 16) i = 0;
 
-			samples[0].StepArray[i].mute === 0 ? Tone.loaded().then(() => kick.current.start(time)) : "";
-			samples[1].StepArray[i].mute === 0 ? Tone.loaded().then(() => snare.current.start(time)) : "";
-			samples[2].StepArray[i].mute === 0 ? Tone.loaded().then(() => hihat.current.start(time)) : "";
-			samples[3].StepArray[i].mute === 0 ? Tone.loaded().then(() => tom.current.start(time)) : "";
+			samples.current[0].StepArray[i].mute === 0 ? Tone.loaded().then(() => kick.current.start(time)) : "";
+			samples.current[1].StepArray[i].mute === 0 ? Tone.loaded().then(() => snare.current.start(time)) : "";
+			samples.current[2].StepArray[i].mute === 0 ? Tone.loaded().then(() => hihat.current.start(time)) : "";
+			samples.current[3].StepArray[i].mute === 0 ? Tone.loaded().then(() => tom.current.start(time)) : "";
 
 			i++;
 		}, "4n").start(0);
