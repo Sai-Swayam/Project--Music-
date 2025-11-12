@@ -9,6 +9,8 @@ import * as Tone from "tone";
 const PlayPause = () => {
 	const { samples } = useContext(Context);
 	const [playing, setPlaying] = useState(true);
+	const [tempo, setTempo] = useState(250);
+	const tempoRef = useRef(250);
 	const loopRef = useRef(null);
 	const kick = useRef(new Tone.Player("/kick-acoustic01.wav").toDestination());
 	const snare = useRef(new Tone.Player("/snare-acoustic01.wav").toDestination());
@@ -40,19 +42,39 @@ const PlayPause = () => {
 		if (playing) {
 			await Tone.start();
 			loopRef.current.start(0);
-			Tone.getTransport().bpm.value = 250;
+			Tone.getTransport().bpm.value = tempoRef.current;
+			console.log(tempo)
 			Tone.getTransport().start();
 		} else {
 			Tone.getTransport().stop();
 		}
 	}
 
+	const handleTempoChange = (event) => {
+		setTempo(event.target.value);
+		tempoRef.current = tempo;
+		Tone.getTransport().bpm.value = tempoRef.current;
+		console.log("rerender")
+	};
+
 	return (
-		<div className="playpause">
-			<button className="button" onClick={playHandler}>
-				{playing ? "Play" : "Pause"}
-			</button>
-		</div>
+		<>
+			<div className="playpause">
+				<button className="button" onClick={playHandler}>
+					{playing ? "Play" : "Pause"}
+				</button>
+				<input
+					type="range"
+					min="0"
+					max="300"
+					defaultValue={tempo}
+					onChange={handleTempoChange}
+					className="tempo-slider"
+				/>
+				<p>Tempo: {tempo}</p>
+			</div>
+		</>
+
 	);
 };
 

@@ -1,40 +1,68 @@
 /* @import url('https://fonts.googleapis.com/css?family=Manrope:700|Manrope:400'); */
 
 .playpause {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* margin-top: 2rem; */
+  /* margin-bottom: 2rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-weight: 400;
+}
+
+input[type="range"] {
+  width: 20%;
+  height: 6px;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
+  background: #222222;
+  border-color: #222222;
+  border-radius: 3px;
+  outline: none;
+  accent-color: #134066; /* modern browsers */
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .button {
-    background-color: rgba(0, 255, 255, 0.199);
-    /* font-family: "monospace"; */
-    letter-spacing: 1px;
-    position: relative;
-    top: 2rem;
-    font-weight: 700;
-    font-size: 2rem;
-    border-radius: 10px;
-    padding: .7rem 2.5rem;
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(255, 255, 255, 0.08);
-    transition: all 0.08s;
-    /* border: none; */
+  font-weight: 700;
+  font-size: 2rem;
+  /* font-family: "monospace"; */
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.7rem 2.5rem;
+  position: relative;
+
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 255, 255, 0.199);
+
+  border-radius: 10px;
+  border: 1px solid rgb(255, 255, 255, 0.08);
+  transition: all 0.08s;
+  /* border: none; */
 }
 
 .button::before {
-    border-radius: 9px;
-    content: "";
-    height: 100%;
-    width: 100%;
-    background: radial-gradient(circle at 10% 10%, rgb(0, 255, 255, 0.7), transparent 100px),
-        radial-gradient(circle at 90% 90%, rgb(0, 255, 255, 0.7), transparent 100px);
-    position: absolute;
-    left: 0px;
-    top: 0px;
-
+  border-radius: 9px;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgb(0, 255, 255, 0.7),
+      transparent 100px
+    ),
+    radial-gradient(circle at 90% 90%, rgb(0, 255, 255, 0.7), transparent 100px);
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
-.button:active{
-    transform: scale(90%);
+.button:active {
+  transform: scale(90%);
 }
