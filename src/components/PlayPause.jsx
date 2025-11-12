@@ -67,6 +67,7 @@ const PlayPause = () => {
 					type="range"
 					min="0"
 					max="300"
+					step="1"
 					defaultValue={tempo}
 					onChange={handleTempoChange}
 					className="tempo-slider"
