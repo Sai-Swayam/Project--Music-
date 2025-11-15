@@ -2,34 +2,41 @@ import { useRef } from "react";
 import Context from "./Context";
 
 const ContextProvider = ({ children }) => {
+	const initStepArray = new Array(16);
+	for (let i = 0; i < 16; ++i)
+		initStepArray[i] = {
+			mute: 1,
+			index: i,
+		};
+
 	const initSamples = [
 		{
 			id: 0,
 			name: "kick",
 			url: "/kick-acoustic01.wav",
 			instance: null,
-			StepArray: Array(16).fill(0)
+			StepArray: [...initStepArray]
 		},
 		{
 			id: 1,
 			name: "snare",
 			url: "/snare-acoustic01.wav",
 			instance: null,
-			StepArray: Array(16).fill(0)
+			StepArray: [...initStepArray]
 		},
 		{
 			id: 2,
 			name: "hihat",
 			url: "/hihat-acoustic01.wav",
 			instance: null,
-			StepArray: Array(16).fill(0)
+			StepArray: [...initStepArray]
 		},
 		{
 			id: 3,
 			name: "tom",
 			url: "/tom-acoustic01.wav",
 			instance: null,
-			StepArray: Array(16).fill(0)
+			StepArray: [...initStepArray]
 		}
 	];
 
