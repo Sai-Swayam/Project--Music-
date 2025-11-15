@@ -1,22 +1,25 @@
-import React from "react";
 import { useState, useContext, useEffect, useRef } from "react";
-
 import Context from "../context/Context";
-
 import "./PlayPause.css";
 import * as Tone from "tone";
 
 const PlayPause = () => {
 	const { samples } = useContext(Context);
 	const [playing, setPlaying] = useState(true);
-	const [tempo, setTempo] = useState(250);
-	const tempoRef = useRef(250);
+	const [tempo, setTempo] = useState(localStorage.getItem("tempo") || 250);
+	const tempoRef = useRef(localStorage.getItem("tempo") || 250);
 	const loopRef = useRef(null);
-	const kick = useRef(new Tone.Player("/kick-acoustic01.wav").toDestination());
-	const snare = useRef(new Tone.Player("/snare-acoustic01.wav").toDestination());
-	const hihat = useRef(new Tone.Player("/hihat-acoustic01.wav").toDestination());
-	const tom = useRef(new Tone.Player("/tom-acoustic01.wav").toDestination());
+	const kick = useRef(null);
+	const snare = useRef(null);
+	const hihat = useRef(null);
+	const tom = useRef(null);
 
+	useEffect(() => {
+		kick.current = new Tone.Player("/kick-acoustic01.wav").toDestination();
+		snare.current = new Tone.Player("/snare-acoustic01.wav").toDestination();
+		hihat.current = new Tone.Player("/hihat-acoustic01.wav").toDestination();
+		tom.current = new Tone.Player("/tom-acoustic01.wav").toDestination();
+	}, []);
 
 	useEffect(() => {
 		let i = 0;
@@ -36,14 +39,12 @@ const PlayPause = () => {
 		};
 	}, [playing]);
 
-	// play/pause
 	async function playHandler() {
 		setPlaying(!playing);
 		if (playing) {
 			await Tone.start();
 			loopRef.current.start(0);
 			Tone.getTransport().bpm.value = tempoRef.current;
-			console.log(tempo)
 			Tone.getTransport().start();
 		} else {
 			Tone.getTransport().stop();
@@ -51,16 +52,30 @@ const PlayPause = () => {
 	}
 
 	const handleTempoChange = (event) => {
-		setTempo(event.target.value);
-		tempoRef.current = tempo;
-		Tone.getTransport().bpm.value = tempoRef.current;
-		console.log("rerender")
+		let tempoValue = parseFloat(event.target.value);
+		setTempo(tempoValue);
+		tempoRef.current = tempoValue;
+		localStorage.setItem("tempo", tempoValue);
+		Tone.getTransport().bpm.value = tempoValue;
 	};
+
+	const playPauseButtonRef = useRef(null);
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			if (e.key === " ") { // spacebar
+				e.preventDefault(); // prevent page scroll
+				playPauseButtonRef.current?.click(); // simulate button click
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, []);
 
 	return (
 		<>
 			<div className="playpause">
-				<button className="button" onClick={playHandler}>
+				<button ref={playPauseButtonRef} className="button" onClick={playHandler}>
 					{playing ? "Play" : "Pause"}
 				</button>
 				<input
@@ -75,7 +90,6 @@ const PlayPause = () => {
 				<p>Tempo: {tempo}</p>
 			</div>
 		</>
-
 	);
 };
 
