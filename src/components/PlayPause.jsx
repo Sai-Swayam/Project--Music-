@@ -4,32 +4,22 @@ import "./PlayPause.css";
 import * as Tone from "tone";
 
 const PlayPause = () => {
-	const { samples } = useContext(Context);
+	const { samples, soundMap } = useContext(Context);
 	const [playing, setPlaying] = useState(true);
 	const [tempo, setTempo] = useState(localStorage.getItem("tempo") || 250);
 	const tempoRef = useRef(localStorage.getItem("tempo") || 250);
 	const loopRef = useRef(null);
-	const kick = useRef(null);
-	const snare = useRef(null);
-	const hihat = useRef(null);
-	const tom = useRef(null);
-
-	useEffect(() => {
-		kick.current = new Tone.Player("/kick-acoustic01.wav").toDestination();
-		snare.current = new Tone.Player("/snare-acoustic01.wav").toDestination();
-		hihat.current = new Tone.Player("/hihat-acoustic01.wav").toDestination();
-		tom.current = new Tone.Player("/tom-acoustic01.wav").toDestination();
-	}, []);
 
 	useEffect(() => {
 		let i = 0;
 		loopRef.current = new Tone.Loop((time) => {
 			if (i === 16) i = 0;
 
-			samples.current[0].StepArray[i].mute === 0 ? Tone.loaded().then(() => kick.current.start(time)) : "";
-			samples.current[1].StepArray[i].mute === 0 ? Tone.loaded().then(() => snare.current.start(time)) : "";
-			samples.current[2].StepArray[i].mute === 0 ? Tone.loaded().then(() => hihat.current.start(time)) : "";
-			samples.current[3].StepArray[i].mute === 0 ? Tone.loaded().then(() => tom.current.start(time)) : "";
+			samples.current.forEach((sample) => {
+				if (sample.StepArray[i].mute === 0) {
+					Tone.loaded().then(() => soundMap.current[sample.name].start(time));
+				}
+			});
 
 			i++;
 		}, "4n").start(0);
@@ -37,6 +27,7 @@ const PlayPause = () => {
 		return () => {
 			loopRef.current.dispose();
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [playing]);
 
 	async function playHandler() {
@@ -81,7 +72,7 @@ const PlayPause = () => {
 				<input
 					type="range"
 					min="0"
-					max="300"
+					max="500"
 					step="1"
 					defaultValue={tempo}
 					onChange={handleTempoChange}

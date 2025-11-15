@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import { useContext } from "react";
 import Patch from "./Patch";
 import "./Rack.css";
 import Context from "../context/Context";
 
 const Rack = () => {
-	// const { samples, setSamples } = useContext(Context);
 	const { samples } = useContext(Context);
 
 	return (
